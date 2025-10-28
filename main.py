@@ -30,7 +30,7 @@ class LinkToBills(discord.ui.View):
 
 import aiohttp
 
-async def llama(prompt: str, model: str = "lunar-3b") -> str:
+async def llama(prompt: str, model: str = "yugo-3b") -> str:
     url = "http://127.0.0.1:11434/api/generate"
     payload = {
         "model": model,
@@ -86,17 +86,6 @@ async def on_message(message):
 
     # Process the command
     await client.process_commands(message)
-
-# AI Mode
-async def save_chat_history(channel: discord.TextChannel, limit: int = 100):
-    filename: str = os.path.join(script_dir, 'temp', "chat_history.txt")
-    messages = []
-    async for message in channel.history(limit=limit, oldest_first=True):
-        # messages.append(f"[{message.created_at}] {message.author.name}: {message.content}")
-        messages.append(f"{message.content}")
-
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write("\n\n".join(messages))
 
 @client.tree.command(name="aimode", description="Switch between AI mode for Lunar in this channel")
 async def aimode(interaction: discord.Interaction):
