@@ -21,13 +21,6 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 client = commands.Bot(command_prefix= "-", intents=intents)
 print(f"running on:{script_dir}")
 
-class LinkToBills(discord.ui.View):
-    def __init__(self):
-        super().__init__()
-        # Add a URL button
-        self.add_item(discord.ui.Button(label="Edit Bills", url="https://docs.google.com/spreadsheets/d/1y8rZlKght5j9bNIxx9lbTGQc7CQa_YiUUIHV-CIO2nM/edit?usp=sharing"))
-
-
 import aiohttp
 
 async def llama(prompt: str, model: str = "yugo-3b") -> str:
@@ -50,7 +43,7 @@ async def llama(prompt: str, model: str = "yugo-3b") -> str:
 
 @client.event
 async def on_ready():
-    print("Lunar is ready")
+    print("Yugo is ready")
     try:
         # Sync the commands with Discord (in case you add new commands)
         synced = await client.tree.sync()
@@ -69,7 +62,7 @@ async def on_message(message):
     if client.user in message.mentions or message.guild is None:
         if len(str(message.content)) == len(str(client.user.id)) + 3:
             async with message.channel.typing():
-                reply = await llama(message.content.replace(f"<@{client.user.id}>", "Hi Lunar").strip())
+                reply = await llama(message.content.replace(f"<@{client.user.id}>", "Hi Yugo").strip())
 
             await message.channel.send(reply)
         else:
