@@ -80,7 +80,7 @@ async def on_message(message):
     # Process the command
     await client.process_commands(message)
 
-@client.tree.command(name="aimode", description="Switch between AI mode for Lunar in this channel")
+@client.tree.command(name="aimode", description="Switch between AI mode for Yugo in this channel")
 async def aimode(interaction: discord.Interaction):
     channel = interaction.channel
     channel_id = str(getattr(channel, "id", None))
